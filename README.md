@@ -10,29 +10,29 @@ The goal is to provide a reproducible and extensible research environment for pa
 
 ### 1.1 Logistic Growth
 A simple nonlinear ODE used for numerical warm-up, solver comparison, and sensitivity tests:
-\[
+$$
 \frac{dX}{dt} = rX\left(1 - \frac{X}{K}\right).
-\]
+$$
 
 ### 1.2 SIR Epidemic Model
 A classical compartment model used to benchmark inference pipelines:
-\[
+$$
 \begin{aligned}
 \frac{dS}{dt} &= -\beta S I, \\
 \frac{dI}{dt} &= \beta S I - \gamma I, \\
 \frac{dR}{dt} &= \gamma I.
 \end{aligned}
-\]
+$$
 
 ### 1.3 Viral Dynamics (Target-Cell Model)
 The main model of interest:
-\[
+$$
 \begin{aligned}
 \frac{dT}{dt} &= -\beta T V, \\
 \frac{dI}{dt} &= \beta T V - \delta I, \\
 \frac{dV}{dt} &= p I - c V.
 \end{aligned}
-\]
+$$
 
 This system captures infection of target cells, production and clearance of virions, and the interplay between observed and unobserved states. Its inverse problem is well-known to be partially identifiable when only viral load \(V(t)\) is observed.
 
@@ -51,23 +51,23 @@ This provides the ground truth needed to evaluate inference methods.
 
 ### 2.2 Classical Least-Squares Inference
 - Uses nonlinear least squares to fit parameters to noisy observations.
-- Supports both full-state observation (T, I, V) and viral-load-only settings.
+- Supports both full-state observation ($T, I, V$) and viral-load-only settings.
 - Includes residual analysis and sensitivity to initial guesses.
 
 What it demonstrates:
 - Classical methods work reliably only if the model is fully observed.  
-- When only \(V(t)\) is available, many parameter combinations produce indistinguishable viral curves, revealing structural non-identifiability.
+- When only $V(t)$ is available, many parameter combinations produce indistinguishable viral curves, revealing structural non-identifiability.
 
 ---
 
 ### 2.3 Identifiability Analysis
 Includes tools for:
-- Profile likelihood computation for parameters such as \(\beta\), \(p\), and \(c\).
+- Profile likelihood computation for parameters such as $\beta$, $p$, and $c$.
 - Detection of flat likelihood manifolds caused by latent state coupling.
-- Exploration of parameter scalings that leave \(V(t)\) nearly unchanged.
+- Exploration of parameter scalings that leave $V(t)$ nearly unchanged.
 
 What it demonstrates:
-- The viral model cannot uniquely determine \(\beta\), \(p\), and \(\delta\) using viral load alone.  
+- The viral model cannot uniquely determine $\beta$, $p$, and $\delta$ using viral load alone.  
 - Practical identifiability heavily depends on data richness (dense vs sparse), noise levels, and whether early infection dynamics are captured.
 
 ---
@@ -92,7 +92,7 @@ Provides PINN architectures that:
 - Estimate both trajectories and parameters jointly.
 
 What it demonstrates:
-- PINNs can reconstruct unobserved states \(T(t)\) and \(I(t)\) surprisingly well.  
+- PINNs can reconstruct unobserved states $T(t)$ and $I(t)$ surprisingly well.  
 - Parameter estimation with PINNs is only reliable if physics loss is balanced properly and data include enough temporal variation.  
 - Over-regularization makes the PINN collapse to degenerate solutions that satisfy the ODE but ignore data.
 
