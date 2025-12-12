@@ -10,9 +10,9 @@ The goal is to provide a reproducible and extensible research environment for pa
 
 ### 1.1 Logistic Growth
 A simple nonlinear ODE used for numerical warm-up, solver comparison, and sensitivity tests:
-$$
+$
 \frac{dX}{dt} = rX\left(1 - \frac{X}{K}\right).
-$$
+$
 
 ### 1.2 SIR Epidemic Model
 A classical compartment model used to benchmark inference pipelines:
